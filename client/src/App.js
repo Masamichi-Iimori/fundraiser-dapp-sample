@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from "react";
-import FundraiserFactoryContract from "./contracts/FundraiserFactory.json";
-import getWeb3 from "./getWeb3";
-import "./App.css";
-import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
-import NewFundraiser from "./NewFundraiser";
-import Home from "./Home";
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
+import React, { useState, useEffect } from 'react';
+import FundraiserFactoryContract from './contracts/FundraiserFactory.json';
+import getWeb3 from './getWeb3';
+import './App.css';
+import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
+import NewFundraiser from './NewFundraiser';
+import Home from './Home';
+import Receipts from './Receipts';
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -66,6 +67,7 @@ const App = () => {
         </AppBar>
         <Route path="/" exact component={Home} />
         <Route path="/new/" component={NewFundraiser} />
+        <Route path="/receipts" component={Receipts} />
       </div>
     </Router>
   );

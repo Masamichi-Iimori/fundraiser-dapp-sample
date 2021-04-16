@@ -1,0 +1,25 @@
+{
+  "name": "fundraiser-dapp",
+  "version": "1.0.0",
+  "description": "実践スマートコントラクトの 10 章写経",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Masamichi-Iimori/fundraiser-dapp-sample.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Masamichi-Iimori/fundraiser-dapp-sample/issues"
+  },
+  "homepage": "https://github.com/Masamichi-Iimori/fundraiser-dapp-sample#readme",
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.0.0"
+  }
+}

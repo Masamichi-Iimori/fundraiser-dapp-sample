@@ -28,36 +28,42 @@ const NewFundraiser = () => {
   const [custodian, setCustodian] = useState(null);
   const [contract, setContract] = useState(null);
   const [accounts, setAccounts] = useState(null);
+  const [web3, setWeb3] = useState(null);
   const classes = useStyles();
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const init = async () => {
+      try {
+        const web3 = await getWeb3();
+        const networkId = await web3.eth.net.getId();
+        const deployedNetwork = FundraiserFactoryContract.networks[networkId];
+        const accounts = await web3.eth.getAccounts();
+        const instance = new web3.eth.Contract(
+          FundraiserFactoryContract.abi,
+          deployedNetwork && deployedNetwork.address
+        );
+
+        setWeb3(web3);
+        setContract(instance);
+        setAccounts(accounts);
+      } catch (error) {
+        alert(
+          `Failed to load web3, accounts, or contract. Check console for details.`
+        );
+        console.error(error);
+      }
+    };
+    init();
+  }, []);
 
   const handleSubmit = async () => {
+    console.log(contract);
     await contract.methods
       .createFundraiser(name, url, imageURL, description, beneficiary)
       .send({ from: accounts[0] });
     alert("Successfully created fundraiser");
   };
 
-  const init = async () => {
-    try {
-      const web3 = await getWeb3();
-      const networkId = await web3.eth.net.getId();
-      const deployedNetwork = FundraiserFactoryContract.networks[networkId];
-      const accounts = await web3.eth.getAccounts();
-      const instance = await web3.eth.Contract(
-        FundraiserFactoryContract.abi,
-        deployedNetwork && deployedNetwork.address
-      );
-      setContract(instance);
-      setAccounts(accounts);
-    } catch (error) {
-      alert(
-        `Failed to load web3, accounts, or contract. Check console for details.`
-      );
-      console.error(error);
-    }
-  };
   return (
     <div className="create-fundraiser-container">
       <h2>Create A New Fundraiser</h2>
